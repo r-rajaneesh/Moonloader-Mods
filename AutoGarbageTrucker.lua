@@ -1,6 +1,6 @@
 script_name("AutoGarbageTruck")
 script_description("Automate the Garbage Truck Commands in Horizon Roleplay")
-script_version("1.2.0")
+script_version("1.3.0")
 script_author("Rajaneesh R (Discord: rajaneeshr)")
 
 require "lib.moonloader"
@@ -41,15 +41,14 @@ function sampev.onServerMessage(color, message)
         sampSendChat("/pickuptrash")
         return false
     elseif string.match(message, "Return the garbage truck to the department of sanitation") then
-    elseif string.match(message, "You have been paid") and
-        string.match(message, "for picking up garbage and returning the garbage truck") then
+    elseif string.match(message, "You have been paid") then
         playerIsInGarbageTruck = false
         startedJob = false
         removeWaypoint()
+        sampAddChatMessage("{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}Garbage Collection {009f66}Complete {aaaaaa}", -1)
     elseif string.match(message, "All current checkpoints, trackers and accepted fares have been reset") then
         -- return false
     end
-
     return true
 end
 
@@ -60,6 +59,8 @@ function sampev.onSendEnterVehicle(vehicleId, isPassenger)
         local vehicleModel = getCarModel(vehicleHandle)
         if vehicleModel == game_models.TRASH then
             playerIsInGarbageTruck = true
+        else
+            playerIsInGarbageTruck = false
         end
     end
 end
@@ -87,26 +88,34 @@ function sampev.onSetCheckpoint(pos, radius)
         if math.abs(pos.x - 1423.8372802734) < 0.01 and math.abs(pos.y + 1318.9272460938) < 0.01 and
             math.abs(pos.z - 13.554699897766) < 0.01 and math.abs(radius - 5) < 0.01 then
             sampAddChatMessage(
-                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}You will be picking up the trash from {4f5bae}Downtown Los Santos {aaaaaa}", -1)
-            sampAddChatMessage("{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {4f5bae}Materials Pickup 1 {ffffff}Alley Way", -1)
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}You will be picking up the trash from {4f5bae}Downtown Los Santos {aaaaaa}",
+                -1)
+            sampAddChatMessage(
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {4f5bae}Materials Pickup 1 {ffffff}Alley Way",
+                -1)
             printStringNow("Go to ~b~~h~Downtown Los Santos", 5000)
         elseif math.abs(pos.x - 1142.04296875) < 0.01 and math.abs(pos.y + 1350.2926025391) < 0.01 and
             math.abs(pos.z - 13.677399635315) < 0.01 and math.abs(radius - 5) < 0.01 then
             sampAddChatMessage(
                 "{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}You will be picking up the trash from Market {aaaaaa}", -1)
-            sampAddChatMessage("{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {ffffff}(behind) {4f5bae}All Saints General Hospital.", -1)
+            sampAddChatMessage(
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {ffffff}(behind) {4f5bae}All Saints General Hospital.",
+                -1)
             printStringNow("Go to ~b~~h~Market", 5000)
         elseif math.abs(pos.x - 1665.3306884766) < 0.01 and math.abs(pos.y + 1002.8746948242) < 0.01 and
             math.abs(pos.z - 24.05590057373) < 0.01 and math.abs(radius - 5) < 0.01 then
             sampAddChatMessage(
-                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}You will be picking up the trash from {4f5bae}Mulholland Intersection {aaaaaa}", -1)
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}You will be picking up the trash from {4f5bae}Mulholland Intersection {aaaaaa}",
+                -1)
             sampAddChatMessage(
-                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {ffffff}Parking Lot next to the {4f5bae}Bank of Los Santos {ffffff}under the bridge.", -1)
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {ffffff}Parking Lot next to the {4f5bae}Bank of Los Santos {ffffff}under the bridge.",
+                -1)
             printStringNow("Go to ~b~~h~Mulholland Intersection", 5000)
         elseif math.abs(pos.x - 2484.8706054688) < 0.01 and math.abs(pos.y + 2529.1831054688) < 0.01 and
             math.abs(pos.z - 13.543171882629) < 0.01 and math.abs(radius - 5) < 0.01 then
             sampAddChatMessage("{aaaaaa}[{33ccff}AGT{aaaaaa}] {ffffff}Return back to {4f5bae}Ocean Docks {aaaaaa}", -1)
-            sampAddChatMessage("{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {4f5bae}Department of Sanitation", -1)
+            sampAddChatMessage(
+                "{aaaaaa}[{33ccff}AGT{aaaaaa}] {33ccff}Landmark{aaaaaa}: {4f5bae}Department of Sanitation", -1)
             printStringNow("Return to ~b~~h~Ocean Docks", 5000)
 
         end
