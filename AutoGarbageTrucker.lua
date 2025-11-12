@@ -1,6 +1,6 @@
 script_name("AutoGarbageTruck")
 script_description("Automate the Garbage Truck Commands in Horizon Roleplay")
-script_version("1.1.0")
+script_version("1.2.0")
 script_author("Rajaneesh R (Discord: rajaneeshr)")
 
 require "lib.moonloader"
